@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "corewebapioracle.fullname" . }}
+  labels:
+    app: {{ template "corewebapioracle.name" . }}
+    chart: {{ template "corewebapioracle.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ template "corewebapioracle.name" . }}
+    release: {{ .Release.Name }}

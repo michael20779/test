@@ -1,0 +1,22 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: corewebapioracle-deployment
+spec:
+  selector:
+    matchLabels:
+      app: corewebapioracle-pod
+  template:
+    metadata:
+      labels:
+        app: corewebapioracle-pod
+    spec:
+      containers:
+      - name: corewebapioracle-container
+        image: corewebapioracle:dev
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
